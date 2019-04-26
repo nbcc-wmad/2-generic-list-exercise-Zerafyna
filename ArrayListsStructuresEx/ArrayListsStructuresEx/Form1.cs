@@ -11,11 +11,19 @@ using System.Windows.Forms;
 
 namespace ArrayListsStructuresEx
 {
+    public struct Grades
+    {
+        public int Max;
+        public char Grade;
+    }
+
     //Erica Moisei -- Apr. 26/2019
     public partial class Form1 : Form
     {
-        ArrayList gradesScale = new ArrayList();
-
+        ArrayList gradesList = new ArrayList();
+        private Grades grades;
+        
+        
         public Form1()
         {
             InitializeComponent();
@@ -23,44 +31,37 @@ namespace ArrayListsStructuresEx
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //adding the range
-            gradesScale.Add(299);
-            gradesScale.Add("F");
-            gradesScale.Add(349);
-            gradesScale.Add("D");
-            gradesScale.Add(399);
-            gradesScale.Add("C");
-            gradesScale.Add(449);
-            gradesScale.Add("B");
-            gradesScale.Add(500);
-            gradesScale.Add("A");
+            //adding the range-grade
+            grades.Max = 299;
+            grades.Grade = 'F';
+            gradesList.Add(grades);
+            grades.Max = 349;
+            grades.Grade = 'D';
+            gradesList.Add(grades);
+            grades.Max = 399;
+            grades.Grade = 'C';
+            gradesList.Add(grades);
+            grades.Max = 449;
+            grades.Grade = 'B';
+            gradesList.Add(grades);
+            grades.Max = 500;
+            grades.Grade = 'A';
+            gradesList.Add(grades);
         }
 
         private void btnFindGrade_Click(object sender, EventArgs e)
         {
             int score = Convert.ToInt32(txtScore.Text);
-            
-            if (score >= 0 && score <= Convert.ToInt32(gradesScale[0]))
+
+            foreach (Grades g in gradesList)
             {
-                MessageBox.Show("The grade is F");
+                if(score <= g.Max)
+                {
+                    MessageBox.Show($"The grade is {g.Grade}");
+                    return;
+                }
             }
-            else if (score <= Convert.ToInt32(gradesScale[2]))
-            {
-                MessageBox.Show("The grade is D");
-            }
-            else if (score <= Convert.ToInt32(gradesScale[4]))
-            {
-                MessageBox.Show("The grade is C");
-            }
-            else if (score <= Convert.ToInt32(gradesScale[6]))
-            {
-                MessageBox.Show("The grade is B");
-            }
-            else if (score <= Convert.ToInt32(gradesScale[8]))
-            {
-                MessageBox.Show("The grade is A");
-            }
-            else
+            if(score < 0 || score > 500)
             {
                 MessageBox.Show("The score is out of the grade range");
             }
