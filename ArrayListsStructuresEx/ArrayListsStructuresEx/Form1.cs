@@ -53,19 +53,19 @@ namespace ArrayListsStructuresEx
         {
             int score = Convert.ToInt32(txtScore.Text);
 
+            if (score < 0 || score > 500)
+            {
+                MessageBox.Show("The score is out of the grade range");
+            }
             foreach (Grades g in gradesList)
             {
                 if(score <= g.Max)
                 {
                     MessageBox.Show($"The grade is {g.Grade}");
                     return;
+                    //break will not wxit the btn method and continue code
                 }
             }
-            if(score < 0 || score > 500)
-            {
-                MessageBox.Show("The score is out of the grade range");
-            }
         }
-
     }
 }
